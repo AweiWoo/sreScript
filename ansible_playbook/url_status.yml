@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: False
+  tasks:
+  - block:
+    - name: 获取url状态
+      uri:
+        url: http://{{inventory_hostname}}:{{uport}}/console
+    - debug:
+        msg: "{{install_soft_id}}"
+    delegate_to: localhost

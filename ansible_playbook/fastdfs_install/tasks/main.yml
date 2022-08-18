@@ -1,0 +1,4 @@
+- include: fdfs_copy.yml
+- include: fdfs_install.yml
+- include: fdfs_config.yml
+- include: nginx_install.yml

@@ -1,0 +1,24 @@
+- name: copy [fastdfs-master] conf to /etc/fdfs/
+  shell: cp {{ item }} /etc/fdfs/ chdir=/opt/fastdfs-master/conf/
+  with_items:
+  - anti-steal.jpg
+  - http.conf
+  - mime.types 
+  when: "ansible_default_ipv4.address in storage_server" 
+- name: copy [mod_fastdfs.conf] to stroage
+  template: src=mod_fastdfs.conf dest=/etc/fdfs/mod_fastdfs.conf
+  when: "ansible_default_ipv4.address in storage_server"
+- name: install nginx on [storage server]
+  shell: ./configure  --add-module=/usr/local/src/fastdfs-nginx-module-master/src && make && make install chdir=/opt/nginx-{{ nginx_version }}
+  when: "ansible_default_ipv4.address in storage_server"
+- name: install nginx on [tracker server]
+  shell: ./configure && make && make install chdir=/opt/nginx-{{ nginx_version }}
+  when: "ansible_default_ipv4.address == tracker_server"
+- name: copy nginx.conf to [tracker] server
+  template: src=nginx_tracker.conf dest=/usr/local/nginx/conf/nginx.conf
+  when: "ansible_default_ipv4.address == tracker_server"
+  notify: start nginx
+- name: copy nginx.conf to [storage] server
+  template: src=nginx_storage.conf dest=/usr/local/nginx/conf/nginx.conf
+  when: "ansible_default_ipv4.address in storage_server"
+  notify: start nginx

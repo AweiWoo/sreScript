@@ -1,0 +1,15 @@
+- name: install dependency package by yum
+  yum: name={{ item }} state=latest
+  with_items:
+  - gcc
+  - gcc-c++
+  - pcre 
+  - pcre-devel
+  - zlib
+  - zlib-devel
+  - openssl
+  - openssl-devel
+- name: install libfastcommon
+  shell: ./make.sh && ./make.sh install chdir=/opt/libfastcommon-master
+- name: install fastdfs 
+  shell: ./make.sh && ./make.sh install chdir=/opt/fastdfs-master

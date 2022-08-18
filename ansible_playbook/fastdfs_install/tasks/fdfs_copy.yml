@@ -1,0 +1,16 @@
+- name: copy [fastdfs-master] package to host
+  unarchive:
+        src: fastdfs-master.zip 
+        dest: /opt
+- name: copy [libfastcommon-master] package to host
+  unarchive: 
+        src: libfastcommon-master.zip 
+        dest: /opt
+- name: copy [nginx] package to host
+  unarchive:
+        src: nginx-1.15.0.tar.gz
+        dest: /opt 
+- name: copy [fastdfs-nginx-module-master] package to host
+  unarchive:
+        src: fastdfs-nginx-module-master.zip
+        dest: /usr/local/src

@@ -1,0 +1,10 @@
+---
+- hosts: "{{src_ip}}"
+  gather_facts: False
+  tasks:
+    - name: 从 {{inventory_hostname}} 上传文件{{src_path}} 到 {{nfs_ip}}:{{target_nfs_path}}
+      synchronize:
+        src: "{{src_path}}"
+        dest: "{{target_nfs_path}}"
+        mode: pull
+      delegate_to: "{{nfs_ip}}"

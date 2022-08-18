@@ -1,0 +1,6 @@
+- name: start tracker
+  service: name=fdfs_trackerd state=started
+- name: start storage
+  service: name=fdfs_storaged state=started
+- name: start nginx
+  command: /usr/local/nginx/sbin/nginx

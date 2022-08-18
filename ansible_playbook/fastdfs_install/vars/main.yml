@@ -1,0 +1,6 @@
+tracker_server: '192.168.19.249'
+storage_server: ['192.168.19.251','192.168.19.253']
+tracker_base_path: '/data/fastdfs/tracker'
+group_name: tools
+storage_base_path: '/data/fastdfs/storage'
+nginx_version: '1.15.0'

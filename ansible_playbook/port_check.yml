@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: False
+  tasks:
+  - name: 检查端口连通性
+    wait_for:
+      host: "{{inventory_hostname}}"
+      port: "{{check_port}}"
+      timeout: 2
+      msg: "unreachable"
+    delegate_to: localhost
+    

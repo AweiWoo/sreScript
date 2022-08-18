@@ -1,0 +1,14 @@
+- name: mkdir tracker datafile directory
+  file: path={{ tracker_base_path }} state=directory
+  when: "ansible_default_ipv4.address == tracker_server"
+- name: copy tracker config to tracker server and start server
+  template: src=tracker.conf dest=/etc/fdfs/tracker.conf
+  when: "ansible_default_ipv4.address == tracker_server"
+  notify: start tracker
+- name: mkdir storage datafile directory
+  file: path={{ storage_base_path }} state=directory
+  when: "ansible_default_ipv4.address in storage_server"
+- name: copy storage config to storage server
+  template: src=storage.conf dest=/etc/fdfs/storage.conf
+  when: "ansible_default_ipv4.address in storage_server"
+  notify: start storage
